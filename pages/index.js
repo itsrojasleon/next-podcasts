@@ -1,27 +1,73 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Home = (props) => {
-  const logo = '/static/platzi-logo.png';
-  return (
-    <div>
-      <h1>Hello World!</h1>
-      <p>Next Course</p>
-      <img src={logo} alt={`Platzi`} />
-      <style jsx>{`
-        h1 {
-          color: red;
+import 'isomorphic-fetch';
+
+class Home extends Component {
+  static async getInitialProps() {
+    const URL = 'https://api.audioboom.com/channels/recommended';
+    const request = await fetch(`${URL}`);
+    const { body: channels } = await request.json();
+
+    return {
+      channels,
+    }
+  }
+  render() {
+    const logo = '/static/platzi-logo.png';
+    const { channels } = this.props;
+    return (
+      <div>
+        <header>Podcasts</header>
+        <div className="channels">
+          {channels.map((channel) => (
+            <div className="channel">
+              <img src={channel.urls.logo_image.original} alt={channel.title} />
+              <h2>{channel.title}</h2>
+            </div>
+          ))}
+        </div>
+        <style jsx>{`
+          header {
+          color: #fff;
+          background: #8756ca;
+          padding: 15px;
+          text-align: center;
         }
-        p {
-          color: yellow;
+        .channels {
+          display: grid;
+          grid-gap: 15px;
+          padding: 15px;
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         }
-        img {
-          max-width: 50%;
+        a.channel {
           display: block;
-          margin: 0 auto;
+          margin-bottom: 0.5em;
+          color: #333;
+          text-decoration: none;
         }
-      `}</style>
-    </div>
-  )
+        .channel img {
+          border-radius: 3px;
+          box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+          width: 100%;
+        }
+        h2 {
+          padding: 5px;
+          font-size: 0.9em;
+          font-weight: 600;
+          margin: 0;
+          text-align: center;
+        }
+        `}</style>
+        <style jsx global>{`
+          body {
+            margin: 0;
+            font-family: system-ui;
+            background-color: white;
+          }
+        `}</style>
+      </div>
+    )
+  }
 }
 
 export default Home;
