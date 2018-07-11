@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-
 import 'isomorphic-fetch';
+import { Link } from 'next/link';
+
+// Prefetch juts works in production
+
+// Prefetch just works with html, css and javascript...
+// ¡Doesn't work with getInitialProps.
 
 class Home extends Component {
   static async getInitialProps() {
@@ -20,10 +25,12 @@ class Home extends Component {
         <header>Podcasts</header>
         <div className="channels">
           {channels.map((channel) => (
-            <div className="channel">
-              <img src={channel.urls.logo_image.original} alt={channel.title} />
-              <h2>{channel.title}</h2>
-            </div>
+            <Link href="/channel" prefetch>
+              <a className="channel">
+                <img src={channel.urls.logo_image.original} alt={channel.title} />
+                <h2>{channel.title}</h2>
+              </a>
+            </Link>
           ))}
         </div>
         <style jsx>{`
