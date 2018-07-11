@@ -1,0 +1,30 @@
+{
+  "name": "next-podcasts",
+  "version": "1.0.0",
+  "description": "Next course",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "start": "next start",
+    "build": "next build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rojasleon/next-podcasts.git"
+  },
+  "keywords": [
+    "Next",
+    "Platzi"
+  ],
+  "author": "Juan Luis Rojas León <luisrojasleon5@gmail.com> (http://luisrojas.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rojasleon/next-podcasts/issues"
+  },
+  "homepage": "https://github.com/rojasleon/next-podcasts#readme",
+  "dependencies": {
+    "next": "6.1.1",
+    "react": "16.4.1",
+    "react-dom": "16.4.1"
+  }
+}
