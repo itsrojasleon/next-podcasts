@@ -5,22 +5,17 @@ class Channel extends Component {
     const idChannel = query.id;
     const URL = `https://api.audioboom.com/channels`;
 
-    let [reqChannel, reqSeries, reqAudios] = await Promise.all([
+    const [reqChannel, reqSeries, reqAudios] = await Promise.all([
       fetch(`${URL}/${idChannel}`),
       fetch(`${URL}/${idChannel}/child_channels`),
       fetch(`${URL}/${idChannel}/audio_clips`),
     ]);
 
-    let dataChannel = await reqChannel.json();
-    let channel = dataChannel.body.channel;
+    let { body: { channel } } = await reqChannel.json();
+    let { body: { audio_clips } } = await reqAudios.json();
+    let { body: { channels } } = await reqSeries.json();
 
-    let dataAudios = await reqAudios.json();
-    let audioClips = dataAudios.body.audio_clips;
-
-    let dataSeries = await reqSeries.json();
-    let series = dataSeries.body.channels;
-
-    return { channel, audioClips, series }
+    return { channel, audioClips: audio_clips, series: channels }
   }
   render() {
     const { channel, audioClips, series } = this.props;
@@ -55,7 +50,6 @@ class Channel extends Component {
             padding: 15px;
             text-align: center;
           }
-
           .banner {
             width: 100%;
             padding-bottom: 25%;
@@ -63,7 +57,6 @@ class Channel extends Component {
             background-size: cover;
             background-color: #aaa;
           }
-
           .channels {
             display: grid;
             grid-gap: 15px;
@@ -92,7 +85,6 @@ class Channel extends Component {
             margin: 0;
             text-align: center;
           }
-
           .podcast {
             display: block;
             text-decoration: none;
