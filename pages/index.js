@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'isomorphic-fetch';
-import { Link } from 'next/link';
+import Link from 'next/link';
 
 // Prefetch juts works in production
 
@@ -11,10 +11,10 @@ class Home extends Component {
   static async getInitialProps() {
     const URL = 'https://api.audioboom.com/channels/recommended';
     const request = await fetch(`${URL}`);
-    const { body: channels } = await request.json();
+    const { body } = await request.json();
 
     return {
-      channels,
+      channels: body,
     }
   }
   render() {
@@ -25,7 +25,7 @@ class Home extends Component {
         <header>Podcasts</header>
         <div className="channels">
           {channels.map((channel) => (
-            <Link href="/channel" prefetch>
+            <Link href={`/channel?id=${channel.id}`} prefetch key={channel.id}>
               <a className="channel">
                 <img src={channel.urls.logo_image.original} alt={channel.title} />
                 <h2>{channel.title}</h2>
