@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'next/link';
 
 class Channel extends Component {
   static async getInitialProps({ query }) {
@@ -23,16 +24,16 @@ class Channel extends Component {
       <div>
         <header>Podcasts</header>
         <div className="banner" style={{ backgroundImage: `url(${channel.urls.banner_image.original})` }} />
-        <h1>{ channel.title }</h1>
-        { series.length > 0 &&
+        <h1>{channel.title}</h1>
+        {series.length > 0 &&
           <div>
             <h2>Series</h2>
             <div className="channels">
-              { series.map((serie) => (
+              {series.map((serie) => (
                 <Link href={`/channel?id=${ serie.id }`} prefetch>
                   <a className="channel">
-                    <img src={ serie.urls.logo_image.original } alt=""/>
-                    <h2>{ serie.title }</h2>
+                    <img src={serie.urls.logo_image.original} alt=""/>
+                    <h2>{serie.title }</h2>
                   </a>
                 </Link>
               ))}
@@ -40,7 +41,7 @@ class Channel extends Component {
           </div>
         }
         <h2>Ultimos Podcasts</h2>
-        { audioClips.map((clip) => (
+        {audioClips.map((clip) => (
           <div className="podcast" key={clip.id}>{ clip.title }</div>
         ))}
         <style jsx>{`
