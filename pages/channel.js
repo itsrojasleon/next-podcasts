@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'next/link';
+import Link from 'next/link';
 
 class Channel extends Component {
   static async getInitialProps({ query }) {
@@ -12,9 +12,9 @@ class Channel extends Component {
       fetch(`${URL}/${idChannel}/audio_clips`),
     ]);
 
-    let { body: { channel } } = await reqChannel.json();
-    let { body: { audio_clips } } = await reqAudios.json();
-    let { body: { channels } } = await reqSeries.json();
+    const { body: { channel } } = await reqChannel.json();
+    const { body: { audio_clips } } = await reqAudios.json();
+    const { body: { channels } } = await reqSeries.json();
 
     return { channel, audioClips: audio_clips, series: channels }
   }
@@ -30,7 +30,7 @@ class Channel extends Component {
             <h2>Series</h2>
             <div className="channels">
               {series.map((serie) => (
-                <Link href={`/channel?id=${ serie.id }`} prefetch>
+                <Link id={serie.id} href={`/channel?id=${ serie.id }`} prefetch>
                   <a className="channel">
                     <img src={serie.urls.logo_image.original} alt=""/>
                     <h2>{serie.title }</h2>
@@ -42,7 +42,14 @@ class Channel extends Component {
         }
         <h2>Ultimos Podcasts</h2>
         {audioClips.map((clip) => (
-          <div className="podcast" key={clip.id}>{ clip.title }</div>
+          <Link href={`/podcast?id=${clip.id}`} prefetch key={clip.id}>
+            <a className="podcast">
+              <h3>{clip.title}</h3>
+              <div className="meta">
+                {Math.ceil(clip.duration / 60)} minutes
+              </div>
+            </a>
+          </Link>
         ))}
         <style jsx>{`
           header {
