@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import 'isomorphic-fetch';
 import Link from 'next/link';
 
+import Layout from '../components/layout';
+
 // Prefetch juts works in production
 
 // Prefetch just works with html, css and javascript...
@@ -22,7 +24,6 @@ class Home extends Component {
     const { channels } = this.props;
     return (
       <div>
-        <header>Podcasts</header>
         <div className="channels">
           {channels.map((channel) => (
             <Link href={`/channel?id=${channel.id}`} prefetch key={channel.id}>

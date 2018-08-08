@@ -33,7 +33,7 @@ class Channel extends Component {
                 <Link id={serie.id} href={`/channel?id=${ serie.id }`} prefetch>
                   <a className="channel">
                     <img src={serie.urls.logo_image.original} alt=""/>
-                    <h2>{serie.title }</h2>
+                    <h2>{serie.title}</h2>
                   </a>
                 </Link>
               ))}

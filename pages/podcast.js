@@ -5,9 +5,9 @@ import Link from 'next/link';
 class Podcast extends Component {
 
   static async getInitialProps ({ query }) {
-    const id = query.id
-    const fetchClip = await fetch(`https://api.audioboom.com/audio_clips/${id}.mp3`)
-    const clip = (await fetchClip.json()).body.audio_clip
+    const id = query.id;
+    const fetchClip = await fetch(`https://api.audioboom.com/audio_clips/${id}.mp3`);
+    const clip = (await fetchClip.json()).body.audio_clip;
     return { clip }
   }
 
