@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+import Error from './_error';
 
 import Layout from '../components/layout';
 import PodcastList from '../components/podcast-list';
