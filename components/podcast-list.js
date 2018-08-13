@@ -1,14 +1,23 @@
 import React  from 'react';
-import Link from 'next/link';
+import { Link } from '../routes';
+import slug from '../helpers/slug';
 
-const PodcastList = ({ audioClips }) => (
+const PodcastList = ({ podcasts }) => (
   <div>
-    {audioClips.map((clip) => (
-    <Link href={`/podcast?id=${clip.id}`} prefetch key={clip.id}>
+    {podcasts.map((podcast) => (
+    <Link 
+      route="podcast"
+      params={{
+        slug: slug(podcast.title),
+        id: podcast.id,
+        slugChannel: slug(podcast.channel.title),
+        idChannel: podcast.channel.id
+      }}
+      prefetch key={podcast.id}>
       <a className="podcast">
-        <h3>{clip.title}</h3>
+        <h3>{podcast.title}</h3>
         <div className="meta">
-          {Math.ceil(clip.duration / 60)} minutes
+          {Math.ceil(podcast.duration / 60)} minutes
         </div>
       </a>
     </Link>

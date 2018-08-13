@@ -1,30 +1,49 @@
 import React, { Component } from 'react';
-import 'isomorphic-fetch';
-import Link from 'next/link';
+import 'isomorphic-fetch'
+import { Link } from '../routes'
+import slug from '../helpers/slug'
+import Layout from '../components/Layout'
+import Error from './_error'
 
-class Podcast extends Component {
+export default class extends React.Component {
 
-  static async getInitialProps ({ query }) {
-    const id = query.id;
-    const fetchClip = await fetch(`https://api.audioboom.com/audio_clips/${id}.mp3`);
-    const clip = (await fetchClip.json()).body.audio_clip;
-    return { clip }
+  static async getInitialProps ({ query, res }) {
+    let { id } = query;
+    try {
+      const fetchClip = await fetch(`https://api.audioboom.com/audio_clips/${id}.mp3`)
+      if( fetchClip.status >= 400 ) {
+        res.statusCode = fetchClip.status
+        return { clip: null, statusCode: fetchClip.status }
+      }
+      const clip = (await fetchClip.json()).body.audio_clip
+      return { clip, statusCode: 200 }
+    } catch(e) {
+      return { clip: null, statusCode: 503 }
+    }
   }
 
   render() {
-    const { clip } = this.props
-    return <div>
-      <header>Podcasts</header>
+    const { clip, statusCode } = this.props
+
+    if( statusCode !== 200 ) {
+      return (<div><Error statusCode={ statusCode } />okokokxsxsx </div>)
+    }
+
+    return <Layout title={clip.title}>
       <div className='modal'>
         <div className='clip'>
           <nav>
-            <Link href={`/channel?id=${clip.channel.id}`}>
+            <Link route='channel' 
+              params={{ slug: slug(clip.channel.title), id: clip.channel.id }} 
+              prefetch>
               <a className='close'>&lt; Volver</a>
             </Link>
           </nav>
+
           <picture>
             <div style={{ backgroundImage: `url(${clip.urls.image || clip.channel.urls.logo_image.original})` }} />
           </picture>
+
           <div className='player'>
             <h3>{ clip.title }</h3>
             <h6>{ clip.channel.title }</h6>
@@ -95,15 +114,6 @@ class Podcast extends Component {
           z-index: 99999;
         }
       `}</style>
-
-      <style jsx global>{`
-        body {
-          margin: 0;
-          font-family: system-ui;
-          background: white;
-        }
-      `}</style>
-    </div>
+    </Layout>
   }
 }
-export default Podcast;

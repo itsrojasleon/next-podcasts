@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
 import Error from './_error';
 
 import Layout from '../components/layout';
@@ -13,7 +12,7 @@ class Channel extends Component {
       const URL = `https://api.audioboom.com/channels`;
       const [reqChannel, reqSeries, reqAudios] = await Promise.all([
         fetch(`${URL}/${idChannel}`),
-        fetch(`${URL}?id=${idChannel}/child_channels`),
+        fetch(`${URL}/${idChannel}/child_channels`),
         fetch(`${URL}/${idChannel}/audio_clips`),
       ]);
 
@@ -32,7 +31,6 @@ class Channel extends Component {
       const { body: { audio_clips } } = await reqAudios.json(); 
       return { channel, audioClips: audio_clips, channels, statusCode: 200 }
     }catch(error) {
-      res.statusCode = 503;
       return {
         channel: null,
         audio_clips: null,
@@ -52,12 +50,33 @@ class Channel extends Component {
       <Layout title={channel.title}>
         <div className="banner" style={{ backgroundImage: `url(${channel.urls.banner_image.original})` }} />
         <h1>{channel.title}</h1>
-        <h2>Series</h2>
-        <div className="channels">
-          <ChannelGrid channels={channels} />
-        </div>
+        {channels.length > 0 &&
+          <div>
+            <h2>Series</h2>
+            <ChannelGrid channels={channels} />
+          </div>
+        }
         <h2>Ultimos Podcasts</h2>
-        <PodcastList audioClips={audioClips} />
+        <PodcastList podcasts={audioClips} />
+        <style jsx>{`
+          .banner {
+            width: 100%;
+            padding-bottom: 25%;
+            background-position: 50% 50%;
+            background-size: cover;
+            background-color: #aaa;
+          }
+          h1 {
+            font-weight: 600;
+            padding: 15px;
+          }
+          h2 {
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 0;
+          }
+      `}</style>
       </Layout>
     )
   }
