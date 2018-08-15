@@ -11,7 +11,7 @@ export default class extends React.Component {
           onClick={ (event) => onClickPodcast(event, podcast) }>
           <h3>{ podcast.title }</h3>
           <div className='meta'>
-            { Math.ceil(podcast.duration / 60) } minutes
+            {Math.ceil(podcast.duration / 60) } minutes
           </div>
         </a>
       )) }

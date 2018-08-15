@@ -26,7 +26,7 @@ export default class extends React.Component {
     const { clip, statusCode } = this.props
 
     if( statusCode !== 200 ) {
-      return (<div><Error statusCode={ statusCode } />okokokxsxsx </div>)
+      return <Error statusCode={ statusCode } />
     }
     
     return <Layout title={clip.title}>

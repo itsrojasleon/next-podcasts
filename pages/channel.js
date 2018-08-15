@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Error from './_error';
 
 import Layout from '../components/layout';
-import PodcastListWithClick from '../components/podcast-list';
+import PodcastListWithClick from '../components/podcast-list-with-click';
 import ChannelGrid from '../components/channel-grid';
+import PodcastPlayer from '../components/podcast-player';
 
 class Channel extends Component {
   state = {
@@ -48,6 +49,12 @@ class Channel extends Component {
       openPodcast: podcast,
     }));
   }
+  closePodcast = (e) => {
+    e.preventDefault();
+    this.setState(() => ({
+      openPodcast: null,
+    }))
+  }
   render() {
     const { channel, audioClips, channels, statusCode } = this.props;
     const { openPodcast } = this.state;
@@ -59,7 +66,11 @@ class Channel extends Component {
     return (
       <Layout title={channel.title}>
         <div className="banner" style={{ backgroundImage: `url(${channel.urls.banner_image.original})` }} />
-        {openPodcast && <div>open Podcast</div>}
+        {openPodcast && (
+          <div className="modal">
+            <PodcastPlayer clip={openPodcast} onClose={this.closePodcast} />
+          </div>
+        )}
         <h1>{channel.title}</h1>
         {channels.length > 0 &&
           <div>
@@ -89,6 +100,15 @@ class Channel extends Component {
             font-size: 1.2em;
             font-weight: 600;
             margin: 0;
+          }
+          .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: black;
+            z-index: 999;
           }
       `}</style>
       </Layout>
