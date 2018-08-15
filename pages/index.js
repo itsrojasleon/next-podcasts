@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'isomorphic-fetch';
-import Link from 'next/link';
 
 import Layout from '../components/layout';
 import ChannelGrid from '../components/channel-grid';

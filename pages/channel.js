@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import Error from './_error';
 
 import Layout from '../components/layout';
-import PodcastList from '../components/podcast-list';
+import PodcastListWithClick from '../components/podcast-list';
 import ChannelGrid from '../components/channel-grid';
 
 class Channel extends Component {
+  state = {
+    openPodcast: null,
+  }
   static async getInitialProps({ query, res }) {
     try {
       const idChannel = query.id;
@@ -39,8 +42,15 @@ class Channel extends Component {
       }
     }
   }
+  openPodcast = (e, podcast) => {
+    e.preventDefault();
+    this.setState(() => ({
+      openPodcast: podcast,
+    }));
+  }
   render() {
     const { channel, audioClips, channels, statusCode } = this.props;
+    const { openPodcast } = this.state;
     if (statusCode !== 200) {
       return (
         <Error statusCode={statusCode} />
@@ -49,6 +59,7 @@ class Channel extends Component {
     return (
       <Layout title={channel.title}>
         <div className="banner" style={{ backgroundImage: `url(${channel.urls.banner_image.original})` }} />
+        {openPodcast && <div>open Podcast</div>}
         <h1>{channel.title}</h1>
         {channels.length > 0 &&
           <div>
@@ -57,7 +68,10 @@ class Channel extends Component {
           </div>
         }
         <h2>Ultimos Podcasts</h2>
-        <PodcastList podcasts={audioClips} />
+        <PodcastListWithClick 
+          podcasts={audioClips} 
+          onClickPodcast={this.openPodcast}  
+        />
         <style jsx>{`
           .banner {
             width: 100%;

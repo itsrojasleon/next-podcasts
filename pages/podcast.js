@@ -10,7 +10,7 @@ export default class extends React.Component {
   static async getInitialProps ({ query, res }) {
     let { id } = query;
     try {
-      const fetchClip = await fetch(`https://api.audioboom.com/audio_clips/${id}.mp3`)
+      const fetchClip = await fetch(`https://api.audioboom.com/audio_clips/${id}.mp3`);
       if( fetchClip.status >= 400 ) {
         res.statusCode = fetchClip.status
         return { clip: null, statusCode: fetchClip.status }
@@ -28,7 +28,7 @@ export default class extends React.Component {
     if( statusCode !== 200 ) {
       return (<div><Error statusCode={ statusCode } />okokokxsxsx </div>)
     }
-
+    
     return <Layout title={clip.title}>
       <div className='modal'>
         <div className='clip'>
