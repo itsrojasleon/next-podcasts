@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'isomorphic-fetch'
 import { Link } from '../routes'
 import slug from '../helpers/slug'
-import Layout from '../components/Layout'
+import Layout from '../components/layout'
 import Error from './_error'
 
 export default class extends React.Component {

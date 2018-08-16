@@ -22,21 +22,29 @@ const Layout = ({ children, title }) => (
     {children}
     <style>{`
     header {
-      color: #fff;
-      background: #8756ca;
+      color: #000;
+      background: #fff;
       padding: 15px;
       text-align: center;
+      border-bottom: 1px solid rgb(240,240,240);
     }
     header a {
-      color: #fff;
+      color: #000;
       text-decoration: none;
+      font-weight: bolder;
+      font-size: 1.2em;
+      transition: .2s;
+    }
+    header a:hover {
+      color: rgb(120,120,120);
     }
     `}</style>
     <style jsx global>{`
+      @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
       body {
         margin: 0;
-        font-family: system-ui;
-        background-color: white;
+        font-family: 'Open Sans', sans-serif;
+        background-color: rgb(246,246,246);
       }
       #nprogress {
           pointer-events: none;

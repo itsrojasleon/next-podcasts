@@ -36,7 +36,7 @@ class Home extends Component {
     }
     return (
       <Layout title="Podcasts">
-        <ChannelGrid channels={channels} />
+        <ChannelGrid box={true} channels={channels} />
       </Layout>
     )
   }
