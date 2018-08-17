@@ -72,17 +72,21 @@ class Channel extends Component {
           </div>
         )}
         <h1>{channel.title}</h1>
-        {channels.length > 0 &&
-          <div>
-            <h2>Series</h2>
-            <ChannelGrid channels={channels} />
+        <div className="podcasts-and-series">
+          {channels.length > 0 &&
+            <div className="category">
+              <h2>Series</h2>
+              <ChannelGrid channels={channels} />
+            </div>
+          }
+          <div className="category">
+            <h2>Ultimos Podcasts</h2>
+            <PodcastListWithClick 
+              podcasts={audioClips} 
+              onClickPodcast={this.openPodcast}  
+            />
           </div>
-        }
-        <h2>Ultimos Podcasts</h2>
-        <PodcastListWithClick 
-          podcasts={audioClips} 
-          onClickPodcast={this.openPodcast}  
-        />
+        </div>
         <style jsx>{`
           .banner {
             width: 100%;
@@ -90,6 +94,18 @@ class Channel extends Component {
             background-position: 50% 50%;
             background-size: cover;
             background-color: #aaa;
+          }
+          .podcasts-and-series {
+            display: grid;
+            width: 80%;
+            margin: auto;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr;
+          }
+          .category {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
           }
           h1 {
             font-weight: 600;

@@ -27,7 +27,15 @@ const ChannelGrid = ({ channels, box }) => (
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       }
       .channels-simple {
-        
+        width: 100%;
+        display: grid;
+        margin: auto;
+        grid-gap: 15px;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        box-sizing: border-box;
+        align-items: stretch;
+        height: 100%;
       }
       .channel {
         display: block;
