@@ -15,6 +15,7 @@ const Layout = ({ children, title }) => (
     <Head>
       <title>{title}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
     </Head>
     <header>
       <Link href="/"><a>Podcasts</a></Link>
@@ -44,7 +45,7 @@ const Layout = ({ children, title }) => (
       body {
         margin: 0;
         font-family: 'Open Sans', sans-serif;
-        background-color: rgb(246,246,246);
+        background-color: #F8F9F9;
       }
       #nprogress {
           pointer-events: none;

@@ -9,10 +9,13 @@ export default class extends React.Component {
         <a href={`/${slug(podcast.channel.title)}.${podcast.channel.id}/${slug(podcast.title)}.${podcast.id}`}
           className='podcast' key={podcast.id}
           onClick={ (event) => onClickPodcast(event, podcast) }>
-          <h3>{ podcast.title }</h3>
-          <div className='meta'>
-            {Math.ceil(podcast.duration / 60) } minutes
+          <div>
+            <h3>{ podcast.title }</h3>
+            <div className='meta'>
+              {Math.ceil(podcast.duration / 60) } minutes
+            </div>
           </div>
+          <i className="fas fa-angle-right"></i>
         </a>
       )) }
       <style jsx>{`
@@ -29,11 +32,14 @@ export default class extends React.Component {
           text-decoration: none;
           color: #333;
           padding: 15px;
-          border-bottom: 1px solid rgba(0,0,0,0.2);
           cursor: pointer;
           background-color: white;
           box-sizing: border-box;
           margin-bottom: 5px;
+          display: grid;
+          grid-template-columns: 4fr 1fr;
+          justify-items: end;
+          align-items: center;
         }
         .podcast:hover {
           color: #000;
@@ -48,6 +54,13 @@ export default class extends React.Component {
           color: #666;
           margin-top: 0.5em;
           font-size: 0.8em;
+        }
+        .fa-angle-right {
+          color: #D42D31;
+          transition: .3s;
+        }
+        .fa-angle-right:hover {
+          transform: scale(1.3);
         }
       `}</style>
     </div>
