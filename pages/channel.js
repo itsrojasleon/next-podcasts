@@ -64,7 +64,7 @@ class Channel extends Component {
       )
     }
     return (
-      <Layout title={channel.title}>
+      <Layout title={channel.title} back={true}>
         <div className="banner" style={{ backgroundImage: `url(${channel.urls.banner_image.original})` }} />
         {openPodcast && (
           <div className="modal">

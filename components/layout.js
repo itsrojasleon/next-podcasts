@@ -10,7 +10,7 @@ Router.onRouteChangeStart = (url) => {
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-const Layout = ({ children, title }) => (
+const Layout = ({ children, title, back }) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -18,7 +18,12 @@ const Layout = ({ children, title }) => (
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
     </Head>
     <header>
-      <Link href="/"><a>Podcasts</a></Link>
+      {back && (
+        <Link href="/" className="back">
+          <a className="go-back"><i className="fas fa-long-arrow-alt-left"></i> Back</a>
+        </Link>
+      )}
+      <Link href="/"><a className={back ? '' : 'a'}>Podcasts</a></Link>
     </header>
     {children}
     <style>{`
@@ -28,6 +33,26 @@ const Layout = ({ children, title }) => (
       padding: 15px;
       text-align: center;
       border-bottom: 1px solid rgb(240,240,240);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      justify-items: center;
+      align-items: center;
+    }   
+    header .back {
+      justify-self: left;
+      color: rgb(160,167,174);
+      font-size: 1em;
+    } 
+    header .back:hover {
+      cursor: pointer;
+    }
+    header .go-back {
+      color: rgb(160,167,174);
+      font-weight: 200;
+      font-size: 1.1em;
+    }
+    .fa-long-arrow-alt-left {
+      color: rgb(160,167,174);
     }
     header a {
       color: #000;
@@ -35,9 +60,13 @@ const Layout = ({ children, title }) => (
       font-weight: bolder;
       font-size: 1.2em;
       transition: .2s;
+      justify-self: left;
+    }
+    header a.a {
+      justify-self: right;
     }
     header a:hover {
-      color: rgb(120,120,120);
+      color: rgb(110,110,100);
     }
     `}</style>
     <style jsx global>{`
