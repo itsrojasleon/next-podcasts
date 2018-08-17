@@ -17,9 +17,9 @@ const Layout = ({ children, title, back }) => (
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
     </Head>
-    <header>
+    <header className={back ? '' : 'is-back'}>
       {back && (
-        <Link href="/" className="back">
+        <Link href="/">
           <a className="go-back"><i className="fas fa-long-arrow-alt-left"></i> Back</a>
         </Link>
       )}
@@ -38,6 +38,9 @@ const Layout = ({ children, title, back }) => (
       justify-items: center;
       align-items: center;
     }   
+    .is-back {
+      grid-template-columns: 1fr;
+    }
     header .back {
       justify-self: left;
       color: rgb(160,167,174);
@@ -63,7 +66,7 @@ const Layout = ({ children, title, back }) => (
       justify-self: left;
     }
     header a.a {
-      justify-self: right;
+      justify-self: center;
     }
     header a:hover {
       color: rgb(110,110,100);

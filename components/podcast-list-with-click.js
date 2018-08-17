@@ -9,7 +9,7 @@ export default class extends React.Component {
         <a href={`/${slug(podcast.channel.title)}.${podcast.channel.id}/${slug(podcast.title)}.${podcast.id}`}
           className='podcast' key={podcast.id}
           onClick={ (event) => onClickPodcast(event, podcast) }>
-          <div>
+          <div className="description">
             <h3>{ podcast.title }</h3>
             <div className='meta'>
               {Math.ceil(podcast.duration / 60) } minutes
@@ -37,9 +37,12 @@ export default class extends React.Component {
           box-sizing: border-box;
           margin-bottom: 5px;
           display: grid;
-          grid-template-columns: 4fr 1fr;
+          grid-template-columns: 1fr .2fr;
           justify-items: end;
           align-items: center;
+        }
+        .podcast .description {
+          justify-self: left;
         }
         .podcast:hover {
           color: #000;
