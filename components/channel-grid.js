@@ -63,6 +63,11 @@ const ChannelGrid = ({ channels, box }) => (
         margin: 0;
         text-align: center;
       }
+      @media(max-width: 481px) {
+        .channels {
+          width: 100%;
+        }
+      }
     `}</style>
   </div>
 );

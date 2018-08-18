@@ -126,6 +126,17 @@ class Channel extends Component {
             background: black;
             z-index: 999;
           }
+          @media(max-width:768px) {
+            .podcasts-and-series {
+              grid-template-columns: 1fr; 
+            }
+          }
+          @media(max-width:481px) {
+            .podcasts-and-series {
+              grid-template-columns: 1fr; 
+              width: 100%;
+            }            
+          }
       `}</style>
       </Layout>
     )
