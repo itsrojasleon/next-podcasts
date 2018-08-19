@@ -32,7 +32,8 @@ const PodcastPlayer = ({ clip, onClose }) => (
 
     <style jsx>{`
       nav {
-        background: none;
+        background: rgb(52,52,52);
+
       }
       nav a {
         display: inline-block;
@@ -44,8 +45,8 @@ const PodcastPlayer = ({ clip, onClose }) => (
       .clip {
         display: flex;
         height: 100%;
-        flex-direction: column;
-        background: #8756ca;
+        flex-direction: column;        
+        background-color: rgb(35,35,35);
         color: white;
       }
       picture {
@@ -66,7 +67,7 @@ const PodcastPlayer = ({ clip, onClose }) => (
       }
       .player {
         padding: 30px;
-        background: rgba(0,0,0,0.3);
+        background: rgb(18,18,18);
         text-align: center;
       }
       h3 {
