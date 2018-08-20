@@ -3,8 +3,8 @@ import slug from '../helpers/slug';
 
 export default class extends React.Component {
   render() {
-    const { podcasts, onClickPodcast } = this.props;
-    return <div className="podcast-list">
+    const { podcasts, onClickPodcast, grid } = this.props;
+    return <div className={grid ? 'podcast-list' : 'podcast-list-grid'}>
       { podcasts.map((podcast) => (
         <a href={`/${slug(podcast.channel.title)}.${podcast.channel.id}/${slug(podcast.title)}.${podcast.id}`}
           className='podcast' key={podcast.id}
@@ -26,6 +26,11 @@ export default class extends React.Component {
           flex-direction: column;
           justify-content: space-around;
           over-flow: auto;
+        }
+        .podcast-list-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 10px;
         }
         .podcast {
           display: block;

@@ -33,7 +33,6 @@ const PodcastPlayer = ({ clip, onClose }) => (
     <style jsx>{`
       nav {
         background: rgb(52,52,52);
-
       }
       nav a {
         display: inline-block;

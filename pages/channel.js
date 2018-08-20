@@ -72,7 +72,7 @@ class Channel extends Component {
           </div>
         )}
         <h1>{channel.title}</h1>
-        <div className="podcasts-and-series">
+        <div className={channels.length > 0 ? 'podcasts-and-series' : 'podcasts-and-series-empty'}>
           {channels.length > 0 &&
             <div className="category">
               <h2>Series</h2>
@@ -83,7 +83,8 @@ class Channel extends Component {
             <h2>Ultimos Podcasts</h2>
             <PodcastListWithClick 
               podcasts={audioClips} 
-              onClickPodcast={this.openPodcast}  
+              onClickPodcast={this.openPodcast}
+              grid={channels.length > 0 ? true : false}  
             />
           </div>
         </div>
@@ -101,6 +102,12 @@ class Channel extends Component {
             margin: auto;
             grid-template-columns: 2fr 1fr;
             grid-template-rows: 1fr;
+          }
+          .podcasts-and-series-empty {
+            display: grid;
+            width: 80%;
+            margin: auto;
+            grid-template-columns: 1fr;
           }
           .category {
             display: flex;
