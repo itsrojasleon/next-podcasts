@@ -29,7 +29,7 @@ export default class extends React.Component {
         }
         .podcast-list-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr;
           grid-gap: 10px;
         }
         .podcast {
@@ -69,6 +69,16 @@ export default class extends React.Component {
         }
         .fa-angle-right:hover {
           transform: scale(1.3);
+        }
+        @media(max-width:768px) {
+          .podcast-list-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+        @media(max-width: 481px) {
+          .podcast-list-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
     </div>
