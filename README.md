@@ -1,5 +1,7 @@
 # App developed in the course of Next.js by Platzi
 
+![Project](./.readme-static/podcasts.png)
+
 ## Requirements
 
 > Node.JS version 10.7.0
