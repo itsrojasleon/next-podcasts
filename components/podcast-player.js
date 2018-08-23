@@ -55,7 +55,7 @@ const PodcastPlayer = ({ clip, onClose }) => (
         flex: 1 1;
         flex-direction: column;
         width: auto;
-        padding: 10%;
+        padding: 5%;
       }
       picture div {
         width: 100%;
@@ -88,6 +88,11 @@ const PodcastPlayer = ({ clip, onClose }) => (
         right: 0;
         bottom: 0;
         z-index: 99999;
+      }
+      @media(max-width: 481px) {
+        picture {
+          padding: 20%;
+        }
       }
     `}</style>
   </div>
